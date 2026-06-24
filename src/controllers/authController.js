@@ -11,7 +11,11 @@ const MFA_SECRET = process.env.MFA_JWT_SECRET || "mfatempsecretkey";
 // REGISTER
 exports.register = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { name, email, password } = req.body;
+
+    if (!name || !email || !password) {
+      return res.status(400).json({ success: false, message: "Name, email, and password are required" });
+    }
 
     const existingUser = await User.findOne({ email });
     if (existingUser) {
@@ -21,6 +25,7 @@ exports.register = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const newUser = new User({
+      name,
       email,
       password: hashedPassword
     });
@@ -172,6 +177,7 @@ exports.verifyMfa = async (req, res) => {
       message: "Login successful",
       token,
       user: {
+        name: user.name,
         email: user.email
       }
     });

@@ -19,6 +19,7 @@ async function seed() {
     } else {
       const hashedPassword = await bcrypt.hash(adminPassword, 10);
       const adminUser = new User({
+        name: 'System Administrator',
         email: adminEmail,
         password: hashedPassword
       });
