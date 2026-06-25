@@ -83,7 +83,7 @@ exports.submitApplication = async (req, res) => {
 
     // 2. Trigger automated notification email to admin
     const adminUrl = process.env.ADMIN_URL || 'http://localhost:3000';
-    const backendUrl = process.env.BACKEND_URL || 'http://localhost:8000';
+    const backendUrl = process.env.BACKEND_URL || 'http://localhost:8001';
     const adminLink = `${adminUrl}/admin/dashboard/career?project=${resolvedProject}`;
     const resumeDownloadLink = `${backendUrl}${resumePath}`;
     

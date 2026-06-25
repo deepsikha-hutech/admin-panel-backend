@@ -52,11 +52,11 @@ RUN mkdir -p uploads uploads/resumes && \
 USER nodejs
 
 # Expose the application port
-EXPOSE 8000
+EXPOSE 8001
 
-# Health check targeting port 8000 at root route '/'
+# Health check targeting port 8001 at root route '/'
 HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
-    CMD node -e "require('http').get('http://localhost:8000/', (r) => {process.exit(r.statusCode === 200 ? 0 : 1)})"
+    CMD node -e "require('http').get('http://localhost:8001/', (r) => {process.exit(r.statusCode === 200 ? 0 : 1)})"
 
 # Use dumb-init to handle signals properly
 ENTRYPOINT ["dumb-init", "--"]
